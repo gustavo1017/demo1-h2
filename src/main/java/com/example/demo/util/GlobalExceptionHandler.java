@@ -1,6 +1,7 @@
 package com.example.demo.util;
 
 import com.example.demo.exception.PetAlreadyExistsException;
+import com.example.demo.exception.PetServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,6 +24,21 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
+                .body(response);
+    }
+
+    @ExceptionHandler(PetServiceException.class)
+    public ResponseEntity<ErrorResponse> handlePetAlreadyExists(
+            PetServiceException ex) {
+
+        ErrorResponse response = new ErrorResponse(
+                HttpStatus.SERVICE_UNAVAILABLE.value(),
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.SERVICE_UNAVAILABLE)
                 .body(response);
     }
 }

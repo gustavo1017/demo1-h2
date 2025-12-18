@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.PetAlreadyExistsException;
+import com.example.demo.exception.PetServiceException;
 import com.example.demo.model.Pet;
 import com.example.demo.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,9 @@ public class PetServiceImpl implements PetService{
     public Flux<Pet> getPets() {
         return Flux.defer(() -> Flux.fromIterable(petRepository.findAll()))
                 .subscribeOn(Schedulers.boundedElastic())
+                .onErrorMap(ex ->
+                        new PetServiceException("Error retrieving pets")
+                )
                 .map(pet -> {
                     if (pet.getBreed() == null || pet.getBreed().isBlank()) {
                         pet.setBreed("Falta detallar");
