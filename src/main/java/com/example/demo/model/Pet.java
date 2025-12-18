@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "pets")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Pet {
 
     @Id
