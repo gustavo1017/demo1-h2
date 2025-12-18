@@ -4,6 +4,7 @@ import com.example.demo.model.Pet;
 import com.example.demo.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -15,5 +16,10 @@ public class PetServiceImpl implements PetService{
     @Override
     public Mono<Pet> savePet(Pet pet) {
         return Mono.just(petRepository.save(pet));
+    }
+
+    @Override
+    public Flux<Pet> getPets() {
+        return Flux.fromIterable(petRepository.findAll());
     }
 }
