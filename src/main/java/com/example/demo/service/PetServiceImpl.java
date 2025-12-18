@@ -41,6 +41,13 @@ public class PetServiceImpl implements PetService{
 
     @Override
     public Flux<Pet> getPets() {
-        return Flux.fromIterable(petRepository.findAll());
+        return Flux.defer(() -> Flux.fromIterable(petRepository.findAll()))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(pet -> {
+                    if (pet.getBreed() == null || pet.getBreed().isBlank()) {
+                        pet.setBreed("Falta detallar");
+                    }
+                    return pet;
+                });
     }
 }

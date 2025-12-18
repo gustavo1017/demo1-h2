@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Table(name = "pets")
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pet {
 
