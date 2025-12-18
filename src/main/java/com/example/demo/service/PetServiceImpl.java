@@ -17,9 +17,8 @@ import reactor.core.scheduler.Schedulers;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PetServiceImpl implements PetService{
+public class PetServiceImpl implements PetService {
 
-    private static final Logger log = LoggerFactory.getLogger(PetServiceImpl.class);
     private final PetRepository petRepository;
 
     @Override
