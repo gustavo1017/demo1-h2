@@ -17,7 +17,8 @@ public class PetController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Pet> save(@RequestBody Pet pet) {
+    public Mono<Pet> save(@RequestHeader("X-Cliente") String cliente,
+            @RequestBody Pet pet) {
         return petService.savePet(pet);
     }
 
