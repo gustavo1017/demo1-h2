@@ -1,9 +1,9 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Pet;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PetRepository extends ReactiveCrudRepository<Pet, Long> {
+public interface PetRepository extends JpaRepository<Pet, Long> {
 }

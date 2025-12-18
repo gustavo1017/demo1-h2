@@ -16,6 +16,6 @@ public class PetServiceImpl implements PetService{
 
     @Override
     public Mono<Pet> savePet(Pet pet) {
-        return petRepository.save(pet);
+        return Mono.just(petRepository.save(pet));
     }
 }

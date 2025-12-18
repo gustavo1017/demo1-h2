@@ -1,15 +1,19 @@
 package com.example.demo.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
 
-public record Pet (
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        Long id,
+@Entity
+@Table(name = "pets")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Pet {
 
-        String name,
-        Integer age,
-        String breed
-){}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private Integer age;
+    private String breed;
+}
